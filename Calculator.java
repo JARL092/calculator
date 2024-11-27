@@ -1,4 +1,4 @@
-public class Calculator {
+1public class Calculator {
     public static int add(int a, int b) {
         return a + b;
     }
