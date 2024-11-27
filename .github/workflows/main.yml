@@ -10,26 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Крок 1: Клонування репозиторію
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Крок 2: Налаштування JDK
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
         java-version: '17'
-        distribution: 'temurin'
+        distribution: 'temurin' # Можна замінити на 'zulu', якщо потрібно
 
-    - name: Build with Gradle/Maven
-      run: ./gradlew build # Замість `./gradlew` використовуйте `mvn` для Maven.
-
-    - name: Run tests
-      run: ./gradlew test
+    # Крок 3: Запуск тестів
+    - name: Build and run tests
+      run: |
+        ./gradlew build # Використовуйте ./mvn test для Maven
+        ./gradlew test
 
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: success()
+    if: success() # Виконується тільки, якщо всі попередні кроки успішні
 
     steps:
-    - name: Simulate Deploy
+    # Крок 4: Симуляція деплою
+    - name: Simulate Deployment
       run: echo "Deployed"
