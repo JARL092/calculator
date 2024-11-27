@@ -1,0 +1,8 @@
+calculator:
+  operands:
+    addition:
+      a: 5
+      b: 3
+    subtraction:
+      a: 10
+      b: 4
