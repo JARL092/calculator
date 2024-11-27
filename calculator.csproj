@@ -1,3 +1,0 @@
-git add .github/
-git commit -m "Add CI pipeline"
-git push
