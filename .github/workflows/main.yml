@@ -20,20 +20,25 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '11' # Використовуйте відповідну версію JDK
+          java-version: '11'
 
       - name: Compile Java files
         run: |
-          javac -d bin src/**/*.java  # Компіляція ваших Java файлів (переконайтеся, що ваші файли знаходяться в директорії src)
+          javac -d bin src/**/*.java  # Компіляція ваших Java файлів
 
-      - name: Run Tests
+      - name: Set environment variable
+        run: echo "DISTRIBUTION=some_value" >> $GITHUB_ENV  # Передача змінної середовища
+
+      - name: Run Tests with parameters
         run: |
-          java -cp bin org.junit.runner.JUnitCore CalculatorTest  # Приклад тестування з JUnit. Замініть на ваш клас тестів
-          
+          java -cp bin org.junit.runner.JUnitCore CalculatorTest --distribution $DISTRIBUTION
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}  # Передача змінної середовища зі сховища секретів або через GitHub Actions
+
   deploy:
     name: Simulate Deployment
     runs-on: ubuntu-latest
-    needs: test  # Потрібно, щоб крок "test" завершився успішно
+    needs: test
 
     steps:
       - name: Simulate Deployment
