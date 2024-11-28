@@ -36,3 +36,6 @@ jobs:
     steps:
       - name: Simulate Deployment
         run: echo "Deployed"
+
+      - name: Simulate Deployment
+        run: echo "Deployed"
