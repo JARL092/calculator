@@ -22,20 +22,19 @@ jobs:
         with:
           java-version: '11' # Використовуйте відповідну версію JDK
 
-      - name: Run tests
+      - name: Compile Java files
         run: |
-          ./gradlew test # Якщо використовуєте Gradle
-          # mvn test # Якщо використовуєте Maven
-        continue-on-error: false  # Перериває пайплайн, якщо тести не пройшли
+          javac -d bin src/**/*.java  # Компіляція ваших Java файлів (переконайтеся, що ваші файли знаходяться в директорії src)
 
+      - name: Run Tests
+        run: |
+          java -cp bin org.junit.runner.JUnitCore CalculatorTest  # Приклад тестування з JUnit. Замініть на ваш клас тестів
+          
   deploy:
     name: Simulate Deployment
     runs-on: ubuntu-latest
     needs: test  # Потрібно, щоб крок "test" завершився успішно
 
     steps:
-      - name: Simulate Deployment
-        run: echo "Deployed"
-
       - name: Simulate Deployment
         run: echo "Deployed"
