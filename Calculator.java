@@ -1,44 +1,14 @@
-import java.util.Scanner;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-public class Calculator {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+public class CalculatorTest {
+    @Test
+    public void testAdd() {
+        assertEquals(8, Calculator.add(5, 3));
+    }
 
-        System.out.println("Добро пожаловать в калькулятор!");
-        System.out.print("Введите первое число: ");
-        double num1 = scanner.nextDouble();
-
-        System.out.print("Введите операцию (+, -, *, /): ");
-        char operator = scanner.next().charAt(0);
-
-        System.out.print("Введите второе число: ");
-        double num2 = scanner.nextDouble();
-
-        double result;
-
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                if (num2 != 0) {
-                    result = num1 / num2;
-                } else {
-                    System.out.println("Ошибка: деление на ноль!");
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Ошибка: недопустимая операция!");
-                return;
-        }
-
-        System.out.println("Результат: " + result);
+    @Test
+    public void testSubtract() {
+        assertEquals(6, Calculator.subtract(10, 4));
     }
 }
