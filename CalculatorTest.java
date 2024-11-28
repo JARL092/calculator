@@ -1,22 +1,14 @@
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class CalculatorTest {
-
     @Test
-    public void testAddition() {
-        Calculator calc = new Calculator();
-        assertEquals(5.0, calc.add(2, 3), 0.0);  // Приклад тесту для додавання
+    public void testAdd() {
+        assertEquals(8, Calculator.add(5, 3));
     }
 
     @Test
-    public void testDivisionByZero() {
-        Calculator calc = new Calculator();
-        try {
-            calc.divide(5, 0);
-            fail("Expected an ArithmeticException to be thrown");
-        } catch (ArithmeticException e) {
-            assertEquals("Division by zero", e.getMessage());
-        }
+    public void testSubtract() {
+        assertEquals(6, Calculator.subtract(10, 4));
     }
 }
