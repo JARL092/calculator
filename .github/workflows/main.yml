@@ -22,21 +22,10 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'temurin'  # Используем 'temurin' вместо 'adoptopenjdk'
+          distribution: 'temurin'
 
-      # Шаг 3: Кэширование зависимостей (для Gradle)
-      - name: Cache Gradle dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      # Шаг 4: Сборка проекта с Gradle
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      # Шаг 5: Запуск тестов
-      - name: Run tests
-        run: ./gradlew test
+      # Шаг 3: Компиляция и запуск тестов вручную (если нет сборщика)
+      - name: Compile and Run tests
+        run: |
+          javac -cp .:$(find . -name '*.jar' | tr '\n' ':') -d bin $(find . -name '*.java')
+          java -cp bin org.junit.platform.console.ConsoleLauncher --scan-classpath
